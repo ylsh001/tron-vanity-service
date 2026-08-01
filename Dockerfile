@@ -16,7 +16,7 @@ WORKDIR /src
 RUN git clone "${PROFANITY_TRON_REPO}" . \
     && git checkout "${PROFANITY_TRON_REF}"
 
-RUN make -j"$(nproc)"
+RUN make LDFLAGS="-s -lOpenCL -lcurl -mcmodel=large" -j"$(nproc)"
 
 FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
 
