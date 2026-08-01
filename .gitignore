@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Environment / secrets
+.env
+*.pem
+*.key
+
+# Build artifacts
+*.o
+profanity.x64
+cache-opencl.*
+
+# Sensitive generated output (contains private keys!)
+result*.txt
+matching.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
