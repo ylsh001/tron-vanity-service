@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ocl-icd-libopencl1 \
         libcurl4 \
         ca-certificates \
+        clinfo \
     && rm -rf /var/lib/apt/lists/* \
     && ln -sf /usr/bin/python3 /usr/bin/python
 

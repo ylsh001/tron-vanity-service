@@ -73,8 +73,27 @@ def parse_result_file(result_path):
     return matches
 
 
+def run_diagnostics():
+    info = {}
+    for name, cmd in (
+        ("nvidia_smi", ["nvidia-smi"]),
+        ("clinfo", ["clinfo"]),
+    ):
+        try:
+            result = subprocess.run(
+                cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=30
+            )
+            info[name] = result.stdout
+        except Exception as e:
+            info[name] = f"error running {' '.join(cmd)}: {e}"
+    return info
+
+
 def handler(event):
     job_input = event.get("input", {}) or {}
+
+    if job_input.get("diagnose"):
+        return {"status": "diagnose", "diagnostics": run_diagnostics()}
 
     try:
         prefix = validate_pattern(job_input.get("prefix"), "prefix")
