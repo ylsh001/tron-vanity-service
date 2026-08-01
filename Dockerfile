@@ -32,7 +32,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         clinfo \
     && rm -rf /var/lib/apt/lists/* \
-    && ln -sf /usr/bin/python3 /usr/bin/python
+    && ln -sf /usr/bin/python3 /usr/bin/python \
+    && mkdir -p /etc/OpenCL/vendors \
+    && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 
 WORKDIR /app
 
